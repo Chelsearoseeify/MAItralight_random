@@ -1,0 +1,161 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  background-color: #1e1e1e;
+  color: #fff;
+  font-family: sans-serif;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #333;
+}
+
+.logo {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  margin: 0;
+}
+
+.logo > span {
+  color: #c20505;
+}
+
+h5 {
+  margin: 0;
+}
+
+/*Page Structure*/
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25rem 1fr;
+  grid-template-rows: 15rem 1fr;
+  grid-template-areas: "trafficlight current_data" "trafficlight history";
+  gap: 32px;
+}
+
+.trafficlight {
+  grid-area: trafficlight;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.current_data {
+  grid-area: current_data;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.current_data_container {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+.history {
+  grid-area: history;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/*Card*/
+
+.card {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+  border-radius: var(--card-border-radius, 3px);
+  border: 1px solid #444343;
+  background: #262525;
+}
+
+.card > h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/*Traffic Light*/
+
+#red_light.light--on {
+  fill: #ce0404;
+}
+
+#yellow_light.light--on {
+  fill: #d59711;
+}
+
+#green_light.light--on {
+  fill: #53b30e;
+}
+
+/*Data Element*/
+
+.data-element_container {
+  width: 100%;
+  background-color: #000;
+  padding: 24px;
+}
+
+.data-element_container > div {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.abp {
+  color: red;
+}
+
+.pap {
+  color: yellow;
+}
+
+.index_post {
+  color: #fff;
+}
+
+.index_pre {
+  opacity: 0.6;
+}
+
+/*History table*/
+
+.table {
+  width: 100%;
+}
+
+.table-container {
+  max-height: 300px; /* Adjust this to control the visible height */
+  overflow-y: auto; /* Enables vertical scrolling */
+  border: 1px solid #ccc; /* Optional, adds a border for visual clarity */
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  position: sticky; /* Keeps the header visible during scrolling */
+  top: 0;
+}

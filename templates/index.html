@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <nav class="nav">
+        <h1 class="logo">m<span>AI</span>tralight</h1>
+    </nav>
+    <section class="container">
+        <div class="trafficlight">
+            <svg width="252" height="598" viewBox="0 0 252 598" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_1_110)">
+                    <rect x="6" y="2" width="240" height="586" rx="10" fill="#353535" shape-rendering="crispEdges" />
+                    <rect x="6.5" y="2.5" width="239" height="585" rx="9.5" stroke="#C8C8C8"
+                        shape-rendering="crispEdges" />
+                    <circle cx="126" cy="110" r="69" fill="#8A8888" stroke="#424242" stroke-width="4" id="red_light"
+                        class="light--on" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M117.355 163.344C143.087 159.206 162.742 136.899 162.742 110C162.742 83.1014 143.087 60.7936 117.355 56.6556C120.17 56.203 123.057 55.9677 126 55.9677C155.841 55.9677 180.032 80.1588 180.032 110C180.032 139.841 155.841 164.032 126 164.032C123.057 164.032 120.17 163.797 117.355 163.344Z"
+                        fill="white" fill-opacity="0.5" />
+                    <circle cx="126" cy="295" r="69" fill="#8A8888" stroke="#424242" stroke-width="4" id="yellow_light"
+                        class="light--on" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M117.355 348.344C143.087 344.206 162.742 321.899 162.742 295C162.742 268.101 143.087 245.794 117.355 241.656C120.17 241.203 123.057 240.968 126 240.968C155.841 240.968 180.032 265.159 180.032 295C180.032 324.841 155.841 349.032 126 349.032C123.057 349.032 120.17 348.797 117.355 348.344Z"
+                        fill="white" fill-opacity="0.5" />
+                    <circle cx="126" cy="480" r="69" fill="#8A8888" stroke="#424242" stroke-width="4" id="green_light"
+                        class="light--on" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M117.355 533.344C143.087 529.206 162.742 506.899 162.742 480C162.742 453.101 143.087 430.794 117.355 426.656C120.17 426.203 123.057 425.968 126 425.968C155.841 425.968 180.032 450.159 180.032 480C180.032 509.841 155.841 534.032 126 534.032C123.057 534.032 120.17 533.797 117.355 533.344Z"
+                        fill="white" fill-opacity="0.5" />
+                </g>
+            </svg>
+
+        </div>
+        <div class="current_data card">
+            <h3>Current data</h3>
+            <div class="current_data_container">
+                <div class="data-element_container abp">
+                    <h5>ABP</h5>
+                    <div id="abp_value">-</div>
+                </div>
+                <div class="data-element_container pap">
+                    <h5>PAP</h5>
+                    <div id="pap_value">-</div>
+                </div>
+                <div class="data-element_container index_pre">
+                    <h5>Index Pre Clip</h5>
+                    <div id="index_pre_value">-</div>
+                </div>
+                <div class="data-element_container index_post">
+                    <h5>Index Post Clip</h5>
+                    <div id="index_post_value">-</div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="history card">
+            <h3>Value History</h3>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>ABP</th>
+                            <th>PAP</th>
+                            <th>Index</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    const tableBody = document.querySelector('.table tbody');
+    const data = [
+        { abp: "-", pap: '-', index: '-' },
+    ];
+
+    tableBody.innerHTML = ''; // Rimuove le righe esistenti
+
+    data.forEach(row => {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+                <td>${new Date(Date.now()).toISOString()}</td>
+                <td>${row.abp}</td>
+                <td>${row.pap}</td>
+                <td>${row.index}</td>
+            `;
+        tableBody.appendChild(newRow);
+    });
+
+    setInterval(async () => {
+        try {
+            // Fetch the latest data from the /data endpoint
+            const response = await fetch("/data");
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result);
+                //document.getElementById("data").textContent = result.data.n1;
+                document.getElementById("abp_value").textContent = result.data.n1;
+                document.getElementById("pap_value").textContent = result.data.n2;
+                document.getElementById("index_pre_value").textContent = Math.trunc(result.data.index_pre * 100) / 100;
+
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${new Date(Date.now()).toISOString()}</td>
+                    <td>${result.data.n1}</td>
+                    <td>${result.data.n2}</td>
+                    <td>${Math.trunc(result.data.index_pre * 100) / 100}</td>
+                `;
+                if (tableBody.firstChild) {
+                    tableBody.insertBefore(newRow, tableBody.firstChild);
+                } else {
+                    tableBody.appendChild(newRow);
+                }
+                if (result.data.index_post !== "NaN")
+                    document.getElementById("index_post_value").textContent = result.data.index_post;
+            } else {
+                console.error("Error fetching data:", response.status);
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }, 1000);  // Update every second
+</script>
+
+</html>
